@@ -12,6 +12,9 @@ namespace _9156
         {
             Node<int> n = Arr2List(new int[] { 5, 7, 1, 2, 3, 6, 4 });
             Console.WriteLine(GetMaxima(n)); //7,6
+
+            n = Arr2List(new int[] { 5, 7, 8 });
+            Console.WriteLine(GetMaxima(n));
         }
 
         static Node<int> Arr2List(int[] arr)
@@ -30,15 +33,10 @@ namespace _9156
 
         public static Node<int> GetMaxima(Node<int> head)
         {
-            // Check if the linked list is empty or has fewer than 3 nodes
-            if (head == null || head.GetNext() == null || head.GetNext().GetNext() == null)
-                return null;
+            Node<int> dummy = new Node<int>(0); // Dummy head for the maxima list
+            Node<int> last = dummy;
 
-            // Create a dummy node for the new list
-            Node<int> dummyHead = new Node<int>(0); // Dummy head for the maxima list
-            Node<int> maximaTail = dummyHead;
-
-            // Pointers to traverse the list
+            // we need 3 pointers: previous, current, next:
             Node<int> prev = head;
             Node<int> current = head.GetNext();
             Node<int> next = current.GetNext();
@@ -48,12 +46,12 @@ namespace _9156
                 // Check if the current node is a maximum
                 if (current.GetValue() > prev.GetValue() && current.GetValue() > next.GetValue())
                 {
-                    // Create a new node for the maximum value
+                    // Create new node for the maximum value
                     Node<int> newNode = new Node<int>(current.GetValue());
 
                     // Add the new node to the maxima list
-                    maximaTail.SetNext(newNode);
-                    maximaTail = newNode;
+                    last.SetNext(newNode);
+                    last = newNode;
                 }
 
                 // Move the pointers forward
@@ -62,7 +60,7 @@ namespace _9156
                 next = next.GetNext();
             }
 
-            return dummyHead.GetNext(); // Return the list starting after the dummy head
+            return dummy.GetNext(); 
         }
 
 
