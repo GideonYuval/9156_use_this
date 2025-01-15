@@ -10,12 +10,51 @@ namespace _9156
     {
         static void Main(string[] args)
         {
-            Node<int> n = Arr2List(new int[] { 5, 7, 1, 2, 3, 6, 4 });
-            Console.WriteLine(GetMaxima(n)); //7,6
-
-            n = Arr2List(new int[] { 5, 7, 8 });
-            Console.WriteLine(GetMaxima(n));
+            RunTests();
         }
+
+        static void RunTests()
+        {
+            // Test 1: General case with multiple maxima
+            Test("Test 1: General case with multiple maxima",
+                new int[] { 5, 7, 1, 2, 3, 6, 4 },
+                "7, 6");
+
+            // Test 2: No maxima (null returned)
+            Test("Test 2: No maxima (null returned)",
+                new int[] { 5, 7, 8 },
+                "null");
+        }
+
+        static void Test(string testDescription, int[] input, string expected)
+        {
+            Node<int> head = Arr2List(input);
+            Node<int> maxima = GetMaxima(head);
+
+            string result = maxima == null ? "null" : ListToString(maxima);
+            Console.WriteLine($"{testDescription}: {(result == expected ? "passed" : $"failed (expected: {expected}, got: {result})")}");
+        }
+
+        static string ListToString(Node<int> head)
+        {
+            if (head == null)
+                return "";
+
+            Node<int> current = head;
+            string result = "";
+
+            while (current != null)
+            {
+                result += current.GetValue();
+                if (current.GetNext() != null)
+                    result += ", ";
+
+                current = current.GetNext();
+            }
+
+            return result;
+        }
+
 
         static Node<int> Arr2List(int[] arr)
         {
