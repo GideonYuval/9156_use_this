@@ -104,6 +104,7 @@ namespace _9156
             return list.ToArray();
         }
 
+
         static Node<int> Arr2List(int[] arr)
         {
             Node<int> lst = new Node<int>(arr[0]);
