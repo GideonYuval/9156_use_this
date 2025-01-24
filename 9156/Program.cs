@@ -119,7 +119,7 @@ namespace _9156
             return lst;
         }
 
-        public static Node<int> GetMaximaGideon(Node<int> head)
+        public static Node<int> GetMaxima(Node<int> head)
         {
             Node<int> dummy = new Node<int>(0); // Dummy head for the maxima list
             Node<int> last = dummy;
